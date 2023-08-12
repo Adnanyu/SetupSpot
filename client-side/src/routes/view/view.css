@@ -1,0 +1,120 @@
+.section-container{
+    /* border: 3px solid greenyellow; */
+    max-height: 75%;
+    /* max-width: 80%; */
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-evenly;
+    margin: auto;
+    flex-wrap: wrap;
+    row-gap: 0;
+    /* display: grid;
+    grid-template-columns: repeat(2, 1fr) ;
+    grid-template-rows: 1fr;
+    grid-gap: 10px; */
+}
+.header-container{
+    flex-basis: 90%;
+    height: 50px;
+}
+.header-container{
+    text-align: start;
+    justify-self: sp;
+}
+
+.view-body-container{
+    display: grid;
+    grid-template-rows: 0.2fr 1fr 1fr 1fr;
+    width: 40%;
+}
+
+.view-links-container{
+    /* border: 3px solid red; */
+}
+
+.view-links-container ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr 1fr;
+    grid-gap: 10px;
+    padding: 0;
+}
+
+.view-links-container li {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    -webkit-filter: drop-shadow(rgba(0,0,0,.067) 0 1px 6px);
+    filter: drop-shadow(rgba(0,0,0,.067) 0 1px 6px);
+    padding: 10px;
+    list-style: none;
+    overflow-x: auto;
+    white-space: nowrap; 
+    
+}
+.view-links-container li:nth-child(odd) {
+    /* padding: 10px 20px; */
+    border-radius: 10px 0 0 10px;
+}
+
+.view-links-container li:nth-child(even) {
+    border-radius: 0 10px 10px 0;
+}
+
+.view-images-container{
+    /* border: 3px solid orange; */
+    border-radius: 15px;
+}
+.view-images-container img{
+    object-fit: cover;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.view-description-container {
+    align-self: center;
+}
+.view-container{
+    border: 3px solid pink;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    -webkit-filter: drop-shadow(rgba(0,0,0,.067) 0 1px 6px);
+    filter: drop-shadow(rgba(0,0,0,.067) 0 1px 6px);
+    padding: 20px;
+    z-index: 3;
+    max-width: 90%;
+    margin: 50px auto;
+}
+.posted-date{
+    color: rgb(116, 114, 114);
+}
+
+.buttons-container{
+    margin-top: 20px;
+}
+.buttons-container button{
+    margin: 0 20px;
+}
+@media (max-width: 950px) {
+    .section-container{
+        /* border: 3px solid greenyellow; */
+        max-height: 100%;
+        /* max-width: 80%; */
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .view-body-container{
+        display: grid;
+        grid-template-columns: 1fr ;
+        grid-auto-rows: auto;
+        /* grid-template-rows: repeat(4,100px) minmax(70px, 100px); */
+        width: 100%;
+    }
+    .view-container{
+        height: auto;
+    }
+}

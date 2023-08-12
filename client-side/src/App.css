@@ -1,0 +1,25 @@
+#root {
+  margin: 0;
+
+  text-align: center;
+  background-color: #fafafa;
+}
+nav{
+  display: flex;
+  justify-content: space-between;
+  background-color: #fafafa;
+  padding: 1rem;
+}
+.space a{
+  margin: 10px;  
+}
+
+img{
+  height: 400px;
+}
+
+
+.card {
+  padding: 2em;
+}
+

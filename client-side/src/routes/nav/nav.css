@@ -1,0 +1,30 @@
+.nav-links-container{
+    display: flex;
+    gap: 10px;
+
+}
+.nav-links{
+    /* background-color: red; */
+    color: black;
+    font-weight: 500;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+    /* margin: 1px 10px; */
+    padding: 12px 18px;
+}
+
+.nav-links:hover{
+    background-color: #f1f1f1;
+}
+.nav-links:nth-child(2){
+    color: white;
+    background-color: rgb(212, 66 , 226)
+}
+.nav-links:nth-child(2):hover{
+    background-color: #e7e7ea;
+}
+.logo-container img{
+    height: 50px;
+    width: 50px;
+}

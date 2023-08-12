@@ -1,0 +1,15 @@
+.auth-form.login, .signup{
+    height: 35rem;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.login{
+    color: white;
+    background-color: rgb(212, 66 , 226)
+}
+.sign-up{
+    color: white;
+    background-color: rgb(212, 66 , 226)
+}

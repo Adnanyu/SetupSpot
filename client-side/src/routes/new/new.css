@@ -1,0 +1,145 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f1f1f1;
+    text-transform: capitalize;
+}
+
+.auth-form {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 80vw;
+
+}
+.auth-form.signup{
+    height: auto;
+}
+
+.input-container {
+    margin-bottom: 15px;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: start;
+    padding-left: 5px;
+}
+
+.input-container input[type="text"],
+.input-container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+input[type="password"]{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.input-container .file-input {
+    display: flex;
+    align-items: center;
+}
+
+.input-container .file-label {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #333;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.input-container .file-label:hover {
+    background-color: #ddd;
+}
+
+.input-container input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.buttons-container{
+    padding: 10px;
+}
+.buttons-container button {
+    background-color: #010000;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.buttons-container button:nth-child(2) {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.text-area textarea {
+    resize: vertical;
+}
+
+.submit-button {
+    background-color: rgb(212, 66 , 226);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.submit-button:hover {
+    background-color: #ddd;
+}
+.links-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 10px 0;
+}
+.links-container input:nth-child(odd) {
+    /* padding: 10px 20px; */
+    border-radius: 10px 0 0 10px;
+}
+
+.links-container input:nth-child(even) {
+    border-radius: 0 10px 10px 0;
+}
+p{
+    color:rgba(0, 0, 0)
+}
+.auth-span{
+    color: red;
+    font-weight: 600;
+    cursor: pointer;
+    color: rgb(212, 66 , 226)
+}

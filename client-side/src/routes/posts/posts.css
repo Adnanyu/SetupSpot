@@ -1,0 +1,16 @@
+.post-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+@media (max-width: 950px) {
+    .post-container{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 20px;
+    }
+}
