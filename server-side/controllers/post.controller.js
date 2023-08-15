@@ -65,3 +65,23 @@ export const deletePost = async (req, res) => {
     res.send('you successfully deleted the post')
 }
 
+export const likePost = async (req, res) => {
+    const { user } = req
+    const { id } = req.params
+    const post = await Post.findById(id)
+    if (!post) return res.status(404).json('post not found')
+    if (post.likes.includes(user._id)) {
+      const post = await Post.findByIdAndUpdate(id, { $pull: { likes: user._id } })
+      return res.status(201).json({
+        message: 'you unliked the post',
+        post: post
+    })
+    }
+    post.likes.push(user._id)
+    await post.save()
+    res.status(201).json({
+      message: 'you liked the post',
+      post: post
+  })
+  }
+

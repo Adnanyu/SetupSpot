@@ -26,10 +26,12 @@ const userSchema = new schema({
         min: 3,
         max: 20
     },
-    favorites: {
-        type: schema.Types.ObjectId,
-        ref: 'Post'
-    }
+    favorites: [
+        {
+            type: schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ]
 }, { timestamps: true }
 )
 

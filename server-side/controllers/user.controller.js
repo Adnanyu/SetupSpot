@@ -6,7 +6,7 @@ export const getUser = (req, res, next) => {
         res.status(500).send('Internal Server Error')
     }
     console.log('user is', req.user)
-    res.send(req.user)
+    return res.send(req.user)
 }
 
 export const registerUser = async (req, res) => {
@@ -44,12 +44,11 @@ export const loginUser = async (req, res, next) => {
                     next(err)
                     return res.status(500).send('Internal Server Error');
                 }
-                console.log(req.user)
+                console.log('it is working now', req.user)
                 return res.send('Successfully Authenticated');
             })
         }
     })(req, res, next)
-    console.log('it is working now', req.user)
 }
 
 export const logoutUser = async (req, res) => {
@@ -58,5 +57,26 @@ export const logoutUser = async (req, res) => {
             return next(err);
         }
         return res.send('succesfully logged out')
+    })
+}
+
+export const addTOfavorites = async (req, res) => {
+    const { user } = req
+    const { id } = req.body
+    const post = await Post.findById(id)
+    const currentUser = await User.findById(user._id)
+    if (currentUser.favorites.includes(post._id)) {
+        const data = await User.findByIdAndUpdate(user._id, { $pull: { favorites: post._id } })
+        console.log('removed post')
+        return res.status(201).json({
+            message: 'You removed the post to favorites',
+            user: data
+        })
+    }
+    currentUser.favorites.push(post._id)
+    await currentUser.save()
+    res.status(201).json({
+        message: 'You added the post to favorites',
+        user: currentUser
     })
 }
