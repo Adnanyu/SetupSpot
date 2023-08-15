@@ -11,7 +11,7 @@ const ViewBody = ({ post, isLoggedIn, deleteHandler }) => {
             <p>{post.body}</p>
           </div>
           <Links post={post} />
-          {isLoggedIn == post.author._id.toString() ? (
+          {isLoggedIn._id == post.author._id.toString() ? (
             <div className='buttons-container'>
               <button onClick={() => navigate(`/posts/${post._id}/edit`)}>
                 Edit

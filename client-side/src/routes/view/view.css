@@ -28,10 +28,10 @@
     grid-template-rows: 0.2fr 1fr 1fr 1fr;
     width: 40%;
 }
-
+/* 
 .view-links-container{
-    /* border: 3px solid red; */
-}
+    border: 3px solid red;
+} */
 
 .view-links-container ul{
     display: grid;
@@ -98,6 +98,74 @@
 .buttons-container button{
     margin: 0 20px;
 }
+
+.view-footer {
+    display: flex;
+    justify-content: space-around;
+}
+/* .view-footer button{
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-align: center;
+  text-decoration: none;
+  height: 30px;
+  fill: blue;
+  border: 1px solid black;
+} */
+/* .view-footer svg >path{
+    height: 30px;
+    fill: blue;
+    background-color: #ff5252;
+}
+
+
+.heart-button {
+    width: 30px;
+    height: 50px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  } 
+  
+  .heart-button::before,
+  .heart-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 25px;
+    height: 40px;
+    border-radius: 50px 50px 0 0;
+    background-color: white;
+    border: 1px solid black;
+    border-left: none;
+
+  }
+  
+  .heart-button::before {
+    left: 0;
+    transform: rotate(-45deg);
+  }
+  
+  .heart-button::after {
+    left: 11px;
+    transform: rotate(45deg);
+  }
+  
+  .heart-button:hover {
+    background-color: #ff1744; 
+  } */
+  
+
+
 @media (max-width: 950px) {
     .section-container{
         /* border: 3px solid greenyellow; */

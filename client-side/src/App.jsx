@@ -19,9 +19,10 @@ const App = () => {
       const response = await axios
         .get('http://localhost:8000/users', { withCredentials: true })
         .then((res) => {
-          setIsLoggedIn(res.data._id)
+          setIsLoggedIn(res.data)
+          console.log(res)
         });
-      // setIsLoggedIn(response.data._id);
+      // setIsLoggedIn(response.data);
 
     }catch (error) {
       console.error('Axios error:', error);;
@@ -38,7 +39,8 @@ const App = () => {
         .then((res) => {
           console.log(res);
         });
-      setIsLoggedIn(false);
+      setIsLoggedIn(null);
+      checkIsLoggedIn();
       window.location.pathname = '../posts';
     } catch (error) {
       console.error('Logout error:', error);
@@ -47,7 +49,7 @@ const App = () => {
 
   useEffect(() => {
     checkIsLoggedIn();
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <div className='App'>
