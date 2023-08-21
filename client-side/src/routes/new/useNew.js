@@ -8,6 +8,7 @@ export const useNew = () => {
   const [image, setImage] = useState([]);
   const [body, setBody] = useState('');
   const [counter, setCounter] = useState(1);
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
 
   const handleAddFeild = () => {
@@ -24,6 +25,7 @@ export const useNew = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     try {
       await axios
         .post(
@@ -37,10 +39,13 @@ export const useNew = () => {
           }
         )
         .then((res) => {
-          navigate(`/posts/${res.data._id}`);
+          console.log(res)
+          navigate(`/posts/${res.data.post._id}`);
         });
     } catch (err) {
-      alert(err.response.data);
+      console.log(err)
+      alert(err.response.data.message);
+      setIsLoading(false)
     }
   };
     
@@ -58,5 +63,7 @@ export const useNew = () => {
         setBody,
         setImage,
         setTitle,
+        setCounter,
+        isLoading
     }
 };

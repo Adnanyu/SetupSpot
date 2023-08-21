@@ -13,9 +13,9 @@
     overflow-y: hidden;
 }
 
-/* .post-card-title{
-    color: rgb(101, 113, 123);
-} */
+.post-card-title{
+    padding: 10px;
+}
 
 .post-card-image{
     /* height: 95%; */

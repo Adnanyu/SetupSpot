@@ -1,9 +1,6 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import FormData from 'form-data';
 import './new.css';
 import { useNew } from './useNew';
+import Spinner from '../../components/spinner/spinner';
 const NewPost = () => {
   
   const {
@@ -18,6 +15,8 @@ const NewPost = () => {
     setBody,
     setImage,
     setTitle,
+    setCounter,
+    isLoading
   } = useNew();
 
   return (
@@ -36,7 +35,7 @@ const NewPost = () => {
         </div>
         <div className='input-container'>
           <label className='file-label' htmlFor='image'>
-            image
+          images max: 5
           </label>
           <input
             type='file'
@@ -98,7 +97,7 @@ const NewPost = () => {
             onChange={(e) => setBody(e.target.value)}
           ></textarea>
         </div>
-        <button className='submit-button'>Post</button>
+        <button style={{disabled: isLoading ? 'true' : 'false'}} className='submit-button'>{ isLoading ? <Spinner button={'button'}/> : 'Post'}</button>
       </form>
     </div>
   );

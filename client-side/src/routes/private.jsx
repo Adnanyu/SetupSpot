@@ -1,9 +1,11 @@
 import React from 'react';
 import { Route, Navigate, Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
-const PrivateRoutes = ({ isLoggedIn }) => {
+const PrivateRoutes = () => {
+    const { currentUser } = useSelector(state => state.user)
     return (
-        isLoggedIn ? <Outlet /> : <Navigate to='/login' />
+        currentUser ? <Outlet /> : <Navigate to='/login' />
     ); 
 };
 

@@ -17,19 +17,32 @@ const postSchema = new schema({
             ref: 'User'
         }
     ],
-    links: [
-        {
-            name: String,
-            link: String
-        }
-    ],
-    images: [{
-        url: String,
-        filename: String
-    }],
+    links: {
+        type: [
+            {
+                name: String,
+                link: String,
+            }
+        ],
+        validate: [arrayMinLengthValidator, 'There must be one at least one link']
+    }
+    ,
+    images: {
+        type: [
+            {
+                url: String,
+                filename: String,
+            }
+        ],
+        validate: [arrayMinLengthValidator, 'There must be one at least one image']
+    },
     body: {
         type: String,
     }
 }, { timestamps: true })
+
+function arrayMinLengthValidator(array) {
+    return array.length >= 1; // Return true if the array has at least one item
+  }
 
 export const Post = mongoose.model('Post', postSchema)

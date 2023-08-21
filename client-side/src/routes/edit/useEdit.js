@@ -1,34 +1,32 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPost } from '../../store/postSlice';
+
 
 export const useEditPost = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [post, setPost] = useState({});
+    const {post} = useSelector(state => state.post)
     const [loading, setLoading] = useState(true);
+    const [isEditing, setIsEditing] = useState(false);
     const [title, setTitle] = useState('');
     const [links, setLinks] = useState(post.links);
     const [image, setImage] = useState({});
     const [body, setBody] = useState('');
     const [listCount, setListCount] = useState([]);
     const [path, setPath] = useState([]);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(`http://localhost:8000/posts/${id}`);
-                setPost(res.data);
-                setTitle(res.data.title);
-                setLinks(res.data.links);
-                setBody(res.data.body);
-                setLoading(false);
-            } catch (error) {
-                console.error('Axios error:', error);
-            }
-        };
-        fetchData();
+        dispatch(getPost(id))
+        
+        setLinks(post.links);
+        setTitle(post.title);
+        setLoading(false);
+        setBody(post.body);
     }, [id]);
 
     const handleAddField = () => {
@@ -58,14 +56,18 @@ export const useEditPost = () => {
     };
 
     const handleChange2 = (index, fieldName, value) => {
-        const updatedInputFields = [...links];
-        updatedInputFields[index][fieldName] = value;
-
-        setLinks(updatedInputFields);
+        const updatedLinks = [...links];
+        const updatedLink = { ...updatedLinks[index] }; 
+        updatedLink[fieldName] = value;
+    
+        updatedLinks[index] = updatedLink; 
+    
+        setLinks(updatedLinks); 
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsEditing(true)
         try {
             const updatedPostData = { image, title, links, path, body };
             const res = await axios.put(`http://localhost:8000/posts/${id}`, updatedPostData, {
@@ -74,13 +76,15 @@ export const useEditPost = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            setLoading(!loading);
-            navigate(`/posts/${res.data._id}`);
-            console.log(res.data);
+            navigate(`/posts/${res.data.post._id}`);
+            console.log(res)
+            alert(res.data.message);
         } catch (err) {
+            setIsEditing(false)
             console.error('Update error:', err);
-            alert(err.response.data.error);
+            alert(err.response.data.message);
         }
+        // dispatch(editPost({ image, title, links, path, body }))
     };
 
     return {
@@ -101,5 +105,6 @@ export const useEditPost = () => {
         setBody,
         setImage,
         setTitle,
+        isEditing
     };
 };

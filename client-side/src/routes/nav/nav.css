@@ -19,10 +19,11 @@
 }
 .nav-links:nth-child(2){
     color: white;
-    background-color: rgb(212, 66 , 226)
+    background-color: #E60023
 }
 .nav-links:nth-child(2):hover{
-    background-color: #e7e7ea;
+    cursor: pointer;
+    background-color:#ff4b66
 }
 .logo-container img{
     height: 50px;

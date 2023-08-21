@@ -1,19 +1,14 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../components/card.component/card';
+import { getAllPosts } from '../../store/postsSlice';
+
 import './posts.css'
 const Posts = () => {
-  const [posts, setPosts] = useState([]);
+  const { posts } = useSelector(state => state.posts)
+  const dispatch = useDispatch()
   useEffect(() => {
-    try {
-      axios
-        .get('http://localhost:8000/posts', { withCredentials: true })
-        .then((res) => {
-          setPosts(res.data);
-        });
-    } catch (error) {
-      console.error('Axios error:', error);;
-    }
+    dispatch(getAllPosts())
   }, []);
   return (
     <main className='post-container'>

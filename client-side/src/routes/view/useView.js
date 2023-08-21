@@ -1,28 +1,18 @@
 import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useDispatch , useSelector} from "react-redux";
+import { getPost } from "../../store/postSlice";
 
 export const useView = () => {
   const { id } = useParams();
-  const [post, setPost] = useState({});
-  const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const { post, isLoading} = useSelector(state => state.post)
 
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        await axios
-          .get(`http://localhost:8000/posts/${id}`, { withCredentials: true })
-          .then((res) => {
-            setPost(res.data);
-            setLoading(false);
-          });
-      } catch (e) {
-        aler(e.message);
-      }
-    };
-    fetch();
+    dispatch(getPost(id))
   }, []);
 
   const deleteHandler = () => {
@@ -42,6 +32,6 @@ export const useView = () => {
         deleteHandler,
         id,
         post,
-        loading
+        isLoading
     }
 };

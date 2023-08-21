@@ -1,7 +1,6 @@
-import axios from 'axios';
+import './edit.css'
 import { useEditPost } from './useEdit';
-
-
+import Spinner from '../../components/spinner/spinner';
 
 const EditPost = () => {
   const {
@@ -10,6 +9,8 @@ const EditPost = () => {
     links,
     body,
     listCount,
+    post,
+    isEditing,
     setBody,
     setImage,
     setTitle,
@@ -21,10 +22,10 @@ const EditPost = () => {
     handleSubmit,
 } = useEditPost();
 
-  if (loading) return <h1>loading</h1>;
+  if (loading) return <Spinner />
 
   return (
-    <div className='auth'>
+    <main className='edit-container'>
       <form action='' onSubmit={handleSubmit} className='auth-form'>
         <div className='input-container'>
           <label htmlFor='title'> title </label>
@@ -38,8 +39,7 @@ const EditPost = () => {
         </div>
         <div className='input-container'>
           <label htmlFor='image' className='file-label'>
-            {' '}
-            image{' '}
+            images max: 5
           </label>
           <input
             type='file'
@@ -50,26 +50,45 @@ const EditPost = () => {
             multiple
           />
         </div>
+        <label htmlFor="">images</label>
+        <div className='edit-images-container'>
+        {post.images.map((img) => {
+          return (
+            <div className='edit-images' key={img.path}>
+              <img src={img.url} alt='' />
+              <label htmlFor='imagedel'>delete</label>
+              <input
+                type='checkbox'
+                name='imagedel[]'
+                id='imagedel'
+                value={img.filename}
+                onChange={handleDeletePicture}
+              />{' '}
+              <br />
+            </div>
+          );
+        })}
+      </div>
         <div className='input-container'>
           <label htmlFor='links'>links</label>
           {links.map((link, index) => {
             return (
               <div key={index} className='links-container'>
-                <input
+                <input key={index}
                   type='text'
                   name='name'
                   value={link.name}
                   id='links'
                   onChange={(e) => handleChange2(index, 'name', e.target.value)}
                 />
-                <input
+                <input key={index + 1}
                   type='text'
                   name='link'
                   value={link.link}
                   id='links'
                   onChange={(e) => handleChange2(index, 'link', e.target.value)}
                 />
-                <input
+                <input key={index + 2}
                   type='checkbox'
                   checked={listCount.includes(index)}
                   onChange={() => handleDeleteList(index)}
@@ -97,35 +116,14 @@ const EditPost = () => {
             id=''
             rows='4'
             placeholder='Please enter the Description...'
-            onChange={(e) => setBody(e.target.value)}
+            onChange={ (e) => setBody(e.target.value) }
+            defaultValue={body}
           >
-            {body}
           </textarea>
         </div>
-        <button className='submit-button'>Edit</button>
+        <button style={ { isadbled: isEditing ? true : false}} className='submit-button'>{isEditing ? <Spinner button={'button'}/> : 'Edit'}</button>
       </form>
-      {/* <div>
-        <h1>image:</h1>
-        {post.images.map((img) => {
-          return (
-            <>
-              <img src={img.url} alt='' />
-              <label htmlFor='imagedel'>delete</label>
-              <input
-                type='checkbox'
-                name='imagedel[]'
-                id='imagedel'
-                value={img.filename}
-                onChange={handleDeletePicture}
-              />{' '}
-              <br />
-            </>
-          );
-        })}
-
-        <div></div>
-      </div> */}
-    </div>
+    </main>
   );
 };
 

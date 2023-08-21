@@ -53,7 +53,7 @@ input[type="password"]{
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.input-container .file-input {
+/* .input-container .file-input {
     display: flex;
     align-items: center;
 }
@@ -78,7 +78,28 @@ input[type="password"]{
     left: 0;
     top: 0;
     opacity: 0;
-}
+} */
+input[type="file"]::file-selector-button {
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 40px;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+    margin-right: 16px;
+    transition: background-color 200ms;
+  }
+  
+  /* file upload button hover state */
+  input[type="file"]::file-selector-button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  /* file upload button active state */
+  input[type="file"]::file-selector-button:active {
+    background-color: #e5e7eb;
+  }
 
 .buttons-container{
     padding: 10px;
@@ -92,8 +113,9 @@ input[type="password"]{
     cursor: pointer;
     margin-right: 5px;
 }
+
 .buttons-container button:nth-child(2) {
-    background-color: red;
+    background-color: #E60023;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -102,12 +124,13 @@ input[type="password"]{
     margin-right: 5px;
 }
 
-.text-area textarea {
+textarea {
     resize: vertical;
+    font-family: 'Poppins', sans-serif;
 }
 
 .submit-button {
-    background-color: rgb(212, 66 , 226);
+    background-color: #E60023;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -115,10 +138,12 @@ input[type="password"]{
     font-weight: bold;
     color: white;
     transition: background-color 0.3s ease-in-out;
+    border-radius: 50px;
 }
 
 .submit-button:hover {
-    background-color: #ddd;
+    background-color: #ff3251;
+    
 }
 .links-container{
     display: flex;
@@ -141,5 +166,5 @@ p{
     color: red;
     font-weight: 600;
     cursor: pointer;
-    color: rgb(212, 66 , 226)
+    color: #E60023
 }

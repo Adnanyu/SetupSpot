@@ -1,40 +1,21 @@
-import save from '../assets/save.svg'
-import heart from '../assets/heart.svg'
+import Save from './save';
+import SaveFill from './saveFill';
 import '../routes/view/view.css'
-import axios from 'axios'
+import { likePost } from '../store/postSlice';
+import { savePost } from '../store/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import Heart from  'react-heart'
 
-const ViewFooter = ({post, isLoggedIn}) => {
-    const likeHandler  = async () => {
-        try {
-            await axios.post(`http://localhost:8000/posts/${post._id}/like`, null, { withCredentials: true }).then(res => {
-                post.likes = res.data.likes
-                alert(res.data.message)
-            })
-        } catch (e) {
-            console.log(e)
-        }
-
-    }
-    const saveHandler = async() => {
-        try {
-            await axios.post('http://localhost:8000/users/favorites', { id: post._id }, { withCredentials: true }).then(res => {
-                isLoggedIn.favorites = res.data.favorites;
-                alert(res.data.message)
-            })
-            // if (response.data) {
-            //     isLoggedIn.favorites = response.data.favorites;// Assuming the response structure has updatedFavorites field
-            
-            // }
-        } catch (e) {
-            console.log(e)
-        }
-    }
+const ViewFooter = () => {
+    const { currentUser } = useSelector(state => state.user)
+    const { post } = useSelector(state => state.post)
+    const dispatch = useDispatch()
 
     return (
-        <div className='view-footer'>
-            <button className='heart-button' style={{backgroundColor: post.likes.includes(isLoggedIn._id) ? 'red' : 'white'  }} onClick={ likeHandler }  >like</button>
-            <button onClick={saveHandler}  style={{backgroundColor: isLoggedIn.favorites.includes(post._id) ? 'red' : 'green'  }} >save</button>
-        </div>
+        currentUser ? <div className='view-footer'>
+            <div style={{display: 'flex', alignItems:'center', gap: '5px'}}><span>{post.likes.length}</span><Heart animationScale = {1.25} isActive={currentUser && post.likes.includes(currentUser._id)} onClick={ ()=> dispatch(likePost(post._id))} style={{ width: "2rem" }} /></div>
+            <div onClick={ () => dispatch(savePost(post._id)) }> {currentUser && currentUser.favorites.includes(post._id) ? <SaveFill className="checked"/> : <Save style={{marginRight: '1em' + '1em'}}/> }</div>            
+        </div> : <></>
     )
 }
 export default ViewFooter

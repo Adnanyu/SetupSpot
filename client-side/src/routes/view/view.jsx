@@ -3,33 +3,33 @@ import axios from 'axios';
 import ViewBody from '../../components/viewBody';
 import dayjs from 'dayjs';
 import * as relativeTime from 'dayjs/plugin/relativeTime';
+import Spinner from '../../components/spinner/spinner';
 
 import './view.css';
 import { useView } from './useView';
-import ViewFooter from '../../components/viewFooter';
 
 
-const ViewPost = ({ isLoggedIn }) => {
+const ViewPost = () => {
   const {
     deleteHandler,
     id,
     post,
-    loading
+    isLoading
 } = useView()
 
   dayjs.extend(relativeTime);
-  if (loading) return <h1>loading</h1>;
+  if (isLoading) return <Spinner/>;
   return (
     <main className='view-container'>
       <section className='section-container'>
         <div className='header-container'>
-          <h3>
-            posted by: <span>{post.author.username}</span>{' '}
-          </h3>
+          <h4 className='post-author'>
+            Posted By: <span>{post.author.username}</span>{' '}
+          </h4>
           <span className='posted-date'>{dayjs(post.createdAt).fromNow()}</span>
         </div>
-        <ViewImage post={ post } isLoggedIn={ isLoggedIn } />
-        <ViewBody post={ post } isLoggedIn={ isLoggedIn } deleteHandler={ deleteHandler } />
+        <ViewImage />
+        <ViewBody deleteHandler={ deleteHandler } />
         
       </section>
     </main>

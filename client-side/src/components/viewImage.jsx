@@ -1,14 +1,15 @@
-import ViewFooter from "./viewFooter"
-const ViewImage = ({ post, isLoggedIn }) => {
-    return (
-        <div className='view-images-container'>
-          {post.images.map((img) => (
-            <>
-              <img className='' src={ img.url } alt='' />{ ' ' }
-            </>
-          )) }
-        <ViewFooter post={ post } isLoggedIn={ isLoggedIn } />
-        </div>
-    )
-}
-export default ViewImage
+import ViewFooter from './viewFooter';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useState } from 'react';
+import ImageSlider from './imageSlider/imageSlider';
+const ViewImage = () => {
+  const { currentUser } = useSelector((state) => state.user);
+
+  return (
+    <div className='view-images-container'>
+      <ImageSlider />
+      <ViewFooter/>
+    </div>
+  );
+};
+export default ViewImage;

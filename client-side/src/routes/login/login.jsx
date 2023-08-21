@@ -1,35 +1,9 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './login.css';
+import { useLoginHook } from './useLogin';
+import Spinner from '../../components/spinner/spinner';
 const Login = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
-  const navigate = useNavigate();
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios
-        .post(
-          'http://localhost:8000/users/login',
-          { ...formData },
-          { withCredentials: true }
-        )
-        .then((res) => alert(res.data));
-      window.location.pathname = '../posts';
-    } catch (err) {
-      alert(err.response.data);
-    }
-
-    console.log(formData);
-  };
+ 
+  const { handleChange, handleSubmit, formData, isLoading, navigate } = useLoginHook()
   
   return (
     <div className='auth'>
@@ -58,7 +32,7 @@ const Login = () => {
           />
         </div>
         <p>Dont have an account? <span className='auth-span' onClick={()=> navigate('/register')}>Register</span></p>
-        <button className='login' onClick={handleSubmit}>Login</button>
+        <button className='login' onClick={handleSubmit}>{isLoading? <Spinner button={'button'}/> : 'Login'}</button>
       </form>
     </div>
   );

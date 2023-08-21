@@ -7,7 +7,7 @@ const Links = ({ post }) => {
                 <>
                   <li key={link.title}>{link.name}</li>
                   <li key={link.link}>
-                    <a href={link.link}>{link.link}</a>
+                    <a href={link.link} target='_blank'>{link.link}</a>
                   </li>
                 </>
               ))}
