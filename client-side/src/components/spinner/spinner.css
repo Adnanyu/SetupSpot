@@ -1,0 +1,23 @@
+#button{
+    width: 1.2em;
+    height: 1.2em;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: auto;
+  }
+  .spinner{
+    width: 5.2em;
+    height: 5.2em;
+    border: 10px solid rgba(255, 255, 255, 0.1);
+    border-top: 10px solid #E60023;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: auto;
+  } 
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
