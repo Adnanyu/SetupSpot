@@ -1,0 +1,20 @@
+.edit-container {
+    display: flex;
+    justify-content: center;
+}
+.edit-images-container{
+    max-width: 300px;
+    display: flex;
+    overflow-x: scroll;
+    height: 200px;
+    padding: 20px;
+    margin: auto;
+    gap: 10px; 
+}
+.edit-images{
+    display: flex;
+    flex-direction: column;
+}
+.edit-images-container img{
+    height: 80%;
+}
