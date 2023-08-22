@@ -1,16 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+
 export const getPost = createAsyncThunk('post/getPost', async (id) => {
+    const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
     try {
-        const response = await axios.get(`http://localhost:8000/posts/${id}`, { withCredentials: true })
+        const response = await axios.get(`${backEndLink}/posts/${id}`, { withCredentials: true })
         return response.data
     } catch (error) {
         console.error('error', error)
     }
 })
 export const likePost = createAsyncThunk('post/likePost', async (id) => {
+    const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
     try{
-        const response = await axios.post(`http://localhost:8000/posts/${id}/like`, null, { withCredentials: true })
+        const response = await axios.post(`${backEndLink}/posts/${id}/like`, null, { withCredentials: true })
         console.log(response.data)
         return response.data
     }catch(error){

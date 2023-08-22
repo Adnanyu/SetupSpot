@@ -20,11 +20,12 @@ export const useAuth = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
     setIsLoading(true)
     try {
       const response = await axios
         .post(
-          'http://localhost:8000/users',
+          `${backEndLink}/users`,
           { ...formData },
           { withCredentials: true }
       )

@@ -67,10 +67,11 @@ export const useEditPost = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
         setIsEditing(true)
         try {
             const updatedPostData = { image, title, links, path, body };
-            const res = await axios.put(`http://localhost:8000/posts/${id}`, updatedPostData, {
+            const res = await axios.put(`${backEndLink}/posts/${id}`, updatedPostData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'multipart/form-data',

@@ -6,8 +6,9 @@ export const initialState = {
 }
   
 export const checkAuthentication = createAsyncThunk('user/checkAuthentication', async () => {
+    const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
     try {
-        const response = await axios.get('http://localhost:8000/users', { withCredentials: true })
+        const response = await axios.get(`${backEndLink}/users`, { withCredentials: true })
         return response.data
     } catch (error) {
         console.log(error)
@@ -15,8 +16,9 @@ export const checkAuthentication = createAsyncThunk('user/checkAuthentication', 
 })
 
 export const logOutUser = createAsyncThunk('user/logOutUser', async () => {
+    const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
     try {
-        const response = await axios.get('http://localhost:8000/users/logout', { withCredentials: true })
+        const response = await axios.get(`${backEndLink}/users/logout`, { withCredentials: true })
         return response.data
     } catch (error) {
         console.log(error)
@@ -24,8 +26,9 @@ export const logOutUser = createAsyncThunk('user/logOutUser', async () => {
 })
 
 export const savePost = createAsyncThunk('user/savePost', async (id, thunkApi) => {
+    const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
     try {
-        const response = await axios.post('http://localhost:8000/users/favorites', { id }, { withCredentials: true })
+        const response = await axios.post(`${backEndLink}/users/favorites`, { id }, { withCredentials: true })
         return response.data
     }catch(error){
         console.error('error:', error)

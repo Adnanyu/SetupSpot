@@ -25,11 +25,12 @@ export const useNew = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
     setIsLoading(true)
     try {
       await axios
         .post(
-          'http://localhost:8000/posts',
+          `${backEndLink}/posts`,
           { image, title, links, body },
           {
             withCredentials: true,

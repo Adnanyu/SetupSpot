@@ -15,6 +15,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const uri = process.env.ATLAS_URI
+const frontEndLink = process.env.FRONTEND_URL || 'http://localhost:5173'
 
 mongoose.connect(uri)
     .then(() => {
@@ -34,7 +35,7 @@ app.use(session({
     cookie: { httpOnly: true , expires: Date.now() + 1000 * 60 * 60 * 24 * 7, maxAge: 1000 * 60 * 60 * 24 * 7}
 }))
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: frontEndLink,
     credentials: true
 }))
 app.use(passport.initialize())

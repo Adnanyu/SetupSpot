@@ -3,8 +3,9 @@ import axios from "axios";
 
 
 export const getAllPosts = createAsyncThunk('posts/getAllPosts', async () => {
+    const backEndLink = import.meta.env.BACKEND_URL || 'http://localhost:8000'
     try {
-        const response = await axios.get('http://localhost:8000/posts', { withCredentials: true })
+        const response = await axios.get(`${backEndLink}/posts`, { withCredentials: true })
         return response.data
     } catch (error) {
         console.error('error happened', error)
@@ -12,7 +13,8 @@ export const getAllPosts = createAsyncThunk('posts/getAllPosts', async () => {
 })
 
 const initialState = {
-    posts: []
+    posts: [],
+    isLoading: true
 }
 
 const postsSlice = createSlice({
@@ -21,6 +23,7 @@ const postsSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getAllPosts.fulfilled, (state, action) => {
             state.posts = action.payload
+            state.isLoading = false
         })
     }
 })

@@ -16,9 +16,10 @@ export const useView = () => {
   }, []);
 
   const deleteHandler = () => {
+    const backEndLink = import.meta.env.BACKEND_URL|| 'http://localhost:8000'
     try {
       axios
-        .delete(`http://localhost:8000/posts/${id}`, { withCredentials: true })
+        .delete(`${backEndLink}/posts/${id}`, { withCredentials: true })
         .then((res) => {
           setResponse(res.data);
           navigate('/posts');
