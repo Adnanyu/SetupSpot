@@ -8,6 +8,7 @@ import LocalStrategy from 'passport-local'
 import { ExpressError } from "./utilities/expressError.js";
 import { User } from './models/user.model.js'
 import cookieParser from 'cookie-parser'
+import MongoStore from 'connect-mongo'
 import session from 'express-session'
 
 
@@ -15,7 +16,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const uri = process.env.ATLAS_URI
-const frontEndLink = process.env.FRONTEND_URL || 'http://localhost:5173'
+const frontEndLink = process.env.FRONTEND_URL || 'https://settt.netlify.app/'
 
 mongoose.connect(uri)
     .then(() => {
@@ -27,21 +28,37 @@ mongoose.connect(uri)
     })
 
 const app = express()
+
+app.set("trust proxy")
+app.enable('trust proxy')
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: false, saveUninitialized: false,
-    cookie: { httpOnly: true , expires: Date.now() + 1000 * 60 * 60 * 24 * 7, maxAge: 1000 * 60 * 60 * 24 * 7}
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        path     : '/',
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+        domain: 'https://setup-spot.netlify.app',
+        sameSite: 'none',
+        secure: true,
+        proxy: true,
+    },
+    store: MongoStore.create({ mongoUrl: uri })
 }))
 app.use(cors({
     origin: frontEndLink,
-    credentials: true
+    credentials: true,
+    exposedHeaders: ["Set-Cookie"]
 }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(cookieParser(process.env.COOKIE_SECRET))
-passport.use(new LocalStrategy(User.authenticate()))
+passport.use(new LocalStrategy(User.authenticate(),{session: true}))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
