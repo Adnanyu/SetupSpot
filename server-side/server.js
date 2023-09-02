@@ -45,7 +45,9 @@ app.use(session({
         path     : '/',
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7,
-        domain: frontEndLink
+        domain: frontEndLink,
+        sameSite: 'none',
+        secure: true
     },
     store: MongoStore.create({ mongoUrl: uri })
 }))
