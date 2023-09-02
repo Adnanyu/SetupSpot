@@ -16,7 +16,9 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const uri = process.env.ATLAS_URI
-const frontEndLink = process.env.FRONTEND_URL || 'https://settt.netlify.app/'
+const frontEndLink = process.env.FRONTEND_URL || 'http://localhost:5173'
+const frontEndLink1 = process.env.FRONTEND_URL1 || 'http://localhost:5173'
+const frontEndLink2 = process.env.FRONTEND_URL2 || 'http://localhost:5173'
 
 mongoose.connect(uri)
     .then(() => {
@@ -43,15 +45,12 @@ app.use(session({
         path     : '/',
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7,
-        domain: 'https://setup-spot.netlify.app',
-        sameSite: 'none',
-        secure: true,
-        proxy: true,
+        domain: frontEndLink
     },
     store: MongoStore.create({ mongoUrl: uri })
 }))
 app.use(cors({
-    origin: frontEndLink,
+    origin: [frontEndLink, frontEndLink1, frontEndLink2],
     credentials: true,
     exposedHeaders: ["Set-Cookie"]
 }))
