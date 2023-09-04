@@ -52,7 +52,7 @@ app.use(session({
     store: MongoStore.create({ mongoUrl: uri })
 }))
 app.use(cors({
-    origin: [frontEndLink, frontEndLink1, frontEndLink2],
+    origin: [frontEndLink, frontEndLink1, frontEndLink2, 'http://localhost:3000'],
     credentials: true,
     exposedHeaders: ["Set-Cookie"]
 }))
