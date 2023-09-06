@@ -48,7 +48,7 @@ app.use(session({
         sameSite: 'none',
         secure: true
     },
-    store: MongoStore.create({ mongoUrl: uri })
+    // store: MongoStore.create({ mongoUrl: uri })
 }))
 app.use(cors({
     origin: [frontEndLink, frontEndLink1, frontEndLink2, 'http://localhost:3000'],
