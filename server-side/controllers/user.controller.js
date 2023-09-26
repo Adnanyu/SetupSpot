@@ -105,3 +105,13 @@ export const addTOfavorites = async (req, res) => {
     user: currentUser,
   });
 };
+
+export const getUserPosts = async(req, res) => {
+  const { id } = req.params
+  const posts = await Post.find({ author: id }).populate('author')
+  if (posts) {
+      console.log(posts)
+      return res.status(200).json(posts)
+  }
+  res.status(404).json({ error: 'User not found' });
+}

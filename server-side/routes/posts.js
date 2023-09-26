@@ -27,4 +27,5 @@ postRouter.route('/:id')
     .put(isAuthor, isAuthenticated, upload.array('image[]'),catchAsync(post.editPost))
     .delete(isAuthor, isAuthenticated, catchAsync(post.deletePost))
     
-postRouter.post('/:id/like',isAuthenticated ,catchAsync(post.likePost))
+postRouter.post('/:id/like', isAuthenticated, catchAsync(post.likePost))
+

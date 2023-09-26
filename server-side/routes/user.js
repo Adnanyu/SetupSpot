@@ -17,4 +17,6 @@ userRouter.post('/login', catchAsync(user.loginUser))
 
 userRouter.get('/logout', catchAsync(user.logoutUser))
 
-userRouter.post('/favorites',isAuthenticated, catchAsync(user.addTOfavorites))
+userRouter.post('/favorites', isAuthenticated, catchAsync(user.addTOfavorites))
+
+userRouter.get('/:id', catchAsync(user.getUserPosts))
